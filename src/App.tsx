@@ -46,21 +46,19 @@ function AppContent() {
 
   const [showSettings, setShowSettings] = useState(false);
   const taskInputRef = useRef<HTMLInputElement>(null);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    if (data.settings.theme !== theme) {
+    if (isInitialMount.current) {
       setTheme(data.settings.theme);
-    }
-    if (data.mood.value !== mood) {
       setMood(data.mood.value);
-    }
-    if (data.settings.accent !== accent) {
       setAccent(data.settings.accent);
+      isInitialMount.current = false;
     }
-  }, [data.settings.theme, data.mood.value, data.settings.accent]);
+  }, []);
 
   useEffect(() => {
-    if (theme !== data.settings.theme || accent !== data.settings.accent) {
+    if (!isInitialMount.current) {
       updateSettings({ theme, accent });
     }
   }, [theme, accent]);
@@ -101,7 +99,11 @@ function AppContent() {
 
   return (
     <div
-      className={`min-h-screen bg-gradient-to-br ${moodTheme.gradient} dark:from-gray-900 dark:to-gray-800 transition-all duration-500 p-4 md:p-8`}
+      className={`min-h-screen transition-all duration-500 p-4 md:p-8 ${
+        theme === 'dark'
+          ? 'bg-gradient-to-br from-gray-900 to-gray-800'
+          : `bg-gradient-to-br ${moodTheme.gradient}`
+      }`}
     >
       <div className="max-w-6xl mx-auto">
         <Header

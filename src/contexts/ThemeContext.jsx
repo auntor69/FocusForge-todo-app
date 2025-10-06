@@ -13,32 +13,32 @@ export const useTheme = () => {
 const moodThemes = {
   Calm: {
     name: 'Calm',
-    gradient: 'from-blue-50 to-white',
+    gradient: 'from-blue-50 via-blue-100 to-blue-50',
     accent: '#60A5FA',
     emoji: '😌'
   },
   Motivated: {
     name: 'Motivated',
-    gradient: 'from-orange-50 to-orange-100',
+    gradient: 'from-orange-50 via-orange-100 to-orange-50',
     accent: '#FB923C',
     emoji: '🔥'
   },
   Tired: {
     name: 'Tired',
-    gradient: 'from-gray-800 to-gray-900',
-    accent: '#9CA3AF',
+    gradient: 'from-slate-100 via-slate-200 to-slate-100',
+    accent: '#64748B',
     emoji: '😴'
   },
   Focused: {
     name: 'Focused',
-    gradient: 'from-green-50 to-emerald-50',
+    gradient: 'from-green-50 via-emerald-100 to-green-50',
     accent: '#34D399',
     emoji: '🎯'
   },
   Stressed: {
     name: 'Stressed',
-    gradient: 'from-purple-50 to-pink-50',
-    accent: '#C084FC',
+    gradient: 'from-rose-50 via-pink-100 to-rose-50',
+    accent: '#F43F5E',
     emoji: '😰'
   }
 };
