@@ -51,7 +51,12 @@ const accentColors = {
 };
 
 export function ThemeProvider({ children, initialTheme = 'light', initialMood = 'Calm', initialAccent = 'blue' }) {
-  const [theme, setTheme] = useState(initialTheme);
+  const [theme, setTheme] = useState(() => {
+    if (initialTheme === 'system') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return initialTheme;
+  });
   const [mood, setMood] = useState(initialMood);
   const [accent, setAccent] = useState(initialAccent);
 
@@ -59,10 +64,11 @@ export function ThemeProvider({ children, initialTheme = 'light', initialMood = 
   const accentColor = accentColors[accent] || accentColors.blue;
 
   useEffect(() => {
+    const root = document.documentElement;
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
     }
   }, [theme]);
 

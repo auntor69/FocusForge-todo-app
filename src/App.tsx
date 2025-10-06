@@ -48,13 +48,21 @@ function AppContent() {
   const taskInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setTheme(data.settings.theme);
-    setMood(data.mood.value);
-    setAccent(data.settings.accent);
-  }, []);
+    if (data.settings.theme !== theme) {
+      setTheme(data.settings.theme);
+    }
+    if (data.mood.value !== mood) {
+      setMood(data.mood.value);
+    }
+    if (data.settings.accent !== accent) {
+      setAccent(data.settings.accent);
+    }
+  }, [data.settings.theme, data.mood.value, data.settings.accent]);
 
   useEffect(() => {
-    updateSettings({ theme, accent });
+    if (theme !== data.settings.theme || accent !== data.settings.accent) {
+      updateSettings({ theme, accent });
+    }
   }, [theme, accent]);
 
   const handleMoodChange = (newMood: string) => {
